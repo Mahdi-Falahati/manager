@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { BiSolidUser } from "react-icons/bi";
+import { BiRightArrowAlt } from "react-icons/bi";
 
 export default function SignUp() {
   const [email, setemail] = useState();
@@ -15,7 +16,7 @@ export default function SignUp() {
         </h2>
         <div>
           <label htmlFor="email" className={labelStyles}>
-            Email :
+            Email <BiRightArrowAlt className="inline-block" />
           </label>
           <input
             id="email"
@@ -28,7 +29,7 @@ export default function SignUp() {
         </div>
         <div>
           <label htmlFor="password" className={labelStyles}>
-            Password :
+            Password <BiRightArrowAlt className="inline-block" />
           </label>
           <input
             id="password"
