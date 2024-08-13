@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { BiSolidUser } from "react-icons/bi";
 import { BiRightArrowAlt } from "react-icons/bi";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function SignUp() {
   const [email, setemail] = useState("");
@@ -12,17 +13,21 @@ export default function SignUp() {
     const isValid = ValidateEmail(email);
     if (isValid && password) {
       console.log("send");
-      const request = await fetch("/api/sign-up", {
+      const request = await fetch("/api/auth/sign-up", {
         method: "POST",
         body: JSON.stringify({ email, password }),
         headers: { "Content-Type": "application/json" },
       });
       const response = await request.json();
-      console.log(response);
+      if (response.status === "success") {
+        toast.success(response.message);
+      } else {
+        toast.warning(response.message);
+      }
     } else if (!isValid) {
-      console.log(email);
+      toast.error("Email is not Valid...");
     } else {
-      console.log(password);
+      toast.error("Enter the password...");
     }
   };
 
@@ -72,6 +77,7 @@ export default function SignUp() {
           </Link>
         </div>
       </section>
+      <ToastContainer />
     </div>
   );
 }
