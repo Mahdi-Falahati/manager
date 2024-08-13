@@ -6,9 +6,9 @@ import { FcTreeStructure } from "react-icons/fc";
 import { GiPirateSkull } from "react-icons/gi";
 import { BiLogOutCircle } from "react-icons/bi";
 
-export default function NavBar() {
+export default function NavBarItems() {
   return (
-    <div className="flex-row items-left justify-between md:flex hidden ">
+    <>
       <Link href="/" className={linkStyles}>
         Todos
         <FcTreeStructure className="ml-1 text-2xl" />
@@ -25,7 +25,7 @@ export default function NavBar() {
         Log out
         <BiLogOutCircle className="ml-1 text-2xl  text-red-700" />
       </button>
-    </div>
+    </>
   );
 }
 

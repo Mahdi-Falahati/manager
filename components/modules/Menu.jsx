@@ -1,10 +1,12 @@
 import BurgerMenu from "@/elements/BurgerMenu";
-import NavBar from "@/elements/NavBar";
+import NavBarItems from "@/elements/navBarItems";
 
 export default function Menu() {
   return (
     <nav>
-      <NavBar />
+      <div className="flex-row items-left justify-between md:flex hidden ">
+        <NavBarItems />
+      </div>
       <BurgerMenu />
     </nav>
   );
