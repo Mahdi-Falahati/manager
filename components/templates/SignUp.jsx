@@ -77,7 +77,7 @@ export default function SignUp() {
           </Link>
         </div>
       </section>
-      <ToastContainer />
+      <ToastContainer limit={1} />
     </div>
   );
 }
