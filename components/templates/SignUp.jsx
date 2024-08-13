@@ -1,5 +1,6 @@
 import { ValidateEmail } from "@/utils/auth";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { BiSolidUser } from "react-icons/bi";
 import { BiRightArrowAlt } from "react-icons/bi";
@@ -8,6 +9,7 @@ import { toast, ToastContainer } from "react-toastify";
 export default function SignUp() {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
+  const router = useRouter();
 
   const RegisterClickHandler = async () => {
     const isValid = ValidateEmail(email);
@@ -21,6 +23,9 @@ export default function SignUp() {
       const response = await request.json();
       if (response.status === "success") {
         toast.success(response.message);
+        setTimeout(() => {
+          router.replace("/sign-in");
+        }, 1500);
       } else {
         toast.warning(response.message);
       }
