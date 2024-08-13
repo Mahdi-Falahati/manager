@@ -1,24 +1,30 @@
 import Link from "next/link";
+import { signOut } from "next-auth/react";
 
 import { BiPencil } from "react-icons/bi";
 import { FcTreeStructure } from "react-icons/fc";
 import { GiPirateSkull } from "react-icons/gi";
+import { BiLogOutCircle } from "react-icons/bi";
 
 export default function NavBar() {
   return (
-    <div className="flex-row items-left justify-between sm:flex hidden w-[400px]">
+    <div className="flex-row items-left justify-between md:flex hidden ">
       <Link href="/" className={linkStyles}>
-        <FcTreeStructure className="mr-1 text-2xl" />
         Todos
+        <FcTreeStructure className="ml-1 text-2xl" />
       </Link>
       <Link href="/add-todo" className={linkStyles}>
-        <BiPencil className="mr-1 text-2xl  text-orange-700" />
         Add Todo
+        <BiPencil className="ml-1 text-2xl  text-orange-700" />
       </Link>
       <Link href="/profile" className={linkStyles}>
-        <GiPirateSkull className="mr-1 text-2xl  text-black" />
         Profile
+        <GiPirateSkull className="ml-1 text-2xl  text-black" />
       </Link>
+      <button onClick={() => signOut()} className={linkStyles}>
+        Log out
+        <BiLogOutCircle className="ml-1 text-2xl  text-red-700" />
+      </button>
     </div>
   );
 }

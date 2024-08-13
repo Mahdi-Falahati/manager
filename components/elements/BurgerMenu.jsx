@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { useState } from "react";
+import { signOut } from "next-auth/react";
 
-import { BiPencil } from "react-icons/bi";
+import { BiLogOutCircle, BiPencil } from "react-icons/bi";
 import { FcTreeStructure } from "react-icons/fc";
 import { GiPirateSkull } from "react-icons/gi";
 
@@ -9,7 +10,7 @@ export default function BurgerMenu() {
   const [visibility, setvisibility] = useState(false);
   return (
     <>
-      <div className="sm:hidden absolute m-4 top-0 right-0">
+      <div className="md:hidden absolute m-4 top-0 right-0">
         <button
           onClick={() => setvisibility(!visibility)}
           className="flex flex-col h-[30px] justify-around items-center"
@@ -20,20 +21,24 @@ export default function BurgerMenu() {
         </button>
       </div>
       {visibility && (
-        <secion className="sm:hidden absolute left-0 right-0 min-h-[350px] z-10 top-14">
+        <secion className="md:hidden absolute left-0 right-0 min-h-[350px] z-10 top-14">
           <div className="flex flex-col justify-around min-h-[250px] bg-white">
             <Link href="/" className={linkStyles}>
-              <FcTreeStructure className="mr-1 text-2xl" />
               Todos
+              <FcTreeStructure className="ml-1 text-2xl" />
             </Link>
             <Link href="/add-todo" className={linkStyles}>
-              <BiPencil className="mr-1 text-2xl  text-orange-700" />
               Add Todo
+              <BiPencil className="ml-1 text-2xl  text-orange-700" />
             </Link>
             <Link href="/profile" className={linkStyles}>
-              <GiPirateSkull className="mr-1 text-2xl  text-black" />
               Profile
+              <GiPirateSkull className="ml-1 text-2xl  text-black" />
             </Link>
+            <button onClick={() => signOut()} className={linkStyles}>
+              Log out
+              <BiLogOutCircle className="ml-1 text-2xl  text-red-700" />
+            </button>
           </div>
         </secion>
       )}
