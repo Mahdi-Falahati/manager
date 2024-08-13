@@ -14,7 +14,6 @@ export default function SignUp() {
   const RegisterClickHandler = async () => {
     const isValid = ValidateEmail(email);
     if (isValid && password) {
-      console.log("send");
       const request = await fetch("/api/auth/sign-up", {
         method: "POST",
         body: JSON.stringify({ email, password }),
