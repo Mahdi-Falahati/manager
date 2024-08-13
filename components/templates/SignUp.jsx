@@ -1,3 +1,4 @@
+import { ValidateEmail } from "@/utils/auth";
 import Link from "next/link";
 import { useState } from "react";
 import { BiSolidUser } from "react-icons/bi";
@@ -6,6 +7,24 @@ import { BiRightArrowAlt } from "react-icons/bi";
 export default function SignUp() {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
+
+  const RegisterClickHandler = async () => {
+    const isValid = ValidateEmail(email);
+    if (isValid && password) {
+      console.log("send");
+      const request = await fetch("/api/sign-up", {
+        method: "POST",
+        body: JSON.stringify({ email, password }),
+        headers: { "Content-Type": "application/json" },
+      });
+      const response = await request.json();
+      console.log(response);
+    } else if (!isValid) {
+      console.log(email);
+    } else {
+      console.log(password);
+    }
+  };
 
   return (
     <div className="flex justify-center items-center min-h-[80vh]">
@@ -40,7 +59,10 @@ export default function SignUp() {
             onChange={(e) => setpassword(e.target.value)}
           />
         </div>
-        <button className="text-white hover:bg-green-700 bg-green-600 h-9 rounded-xl w-[150px] mt-4 mb-1 tracking-widest font-bold italic">
+        <button
+          onClick={RegisterClickHandler}
+          className="text-white hover:bg-green-700 bg-green-600 h-9 rounded-xl w-[150px] mt-4 mb-1 tracking-widest font-bold italic"
+        >
           Register
         </button>
         <div className="flex justify-center font-bold italic text-sm">
