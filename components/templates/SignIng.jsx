@@ -1,5 +1,8 @@
+import { ValidateEmail } from "@/utils/auth";
 import Link from "next/link";
 import { useState } from "react";
+import { signIn } from "next-auth/react";
+
 import { BiLogInCircle } from "react-icons/bi";
 import { BiRightArrowAlt } from "react-icons/bi";
 
@@ -7,6 +10,20 @@ export default function SignIng() {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
 
+  const LoginClickHandler = async () => {
+    const isValid = ValidateEmail(email);
+    if (isValid && password) {
+      const response = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+
+      console.log(response.error);
+    } else if (!isValid) {
+    } else {
+    }
+  };
   return (
     <div className="flex justify-center items-center min-h-[80vh]">
       <section className="flex flex-col rounded-2xl mx-2 shadow-2xl p-5 items-center border">
@@ -40,7 +57,10 @@ export default function SignIng() {
             onChange={(e) => setpassword(e.target.value)}
           />
         </div>
-        <button className="text-white hover:bg-green-700 bg-green-600 h-9 rounded-xl w-[150px] mt-4 mb-1 tracking-widest font-bold italic">
+        <button
+          onClick={LoginClickHandler}
+          className="text-white hover:bg-green-700 bg-green-600 h-9 rounded-xl w-[150px] mt-4 mb-1 tracking-widest font-bold italic"
+        >
           Login
         </button>
         <div className="flex justify-center font-bold italic text-sm">
