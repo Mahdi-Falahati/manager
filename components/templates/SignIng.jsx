@@ -19,9 +19,15 @@ export default function SignIng() {
         redirect: false,
       });
 
-      console.log(response.error);
+      if (response.status === 200) {
+        toast.success("Login successfully...");
+      } else {
+        toast.warning(response.message);
+      }
     } else if (!isValid) {
+      toast.error("Email is not Valid...");
     } else {
+      toast.error("Enter the password...");
     }
   };
   return (
