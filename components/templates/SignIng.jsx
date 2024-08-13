@@ -5,10 +5,13 @@ import { signIn } from "next-auth/react";
 
 import { BiLogInCircle } from "react-icons/bi";
 import { BiRightArrowAlt } from "react-icons/bi";
+import { useRouter } from "next/router";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function SignIng() {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
+  const router = useRouter();
 
   const LoginClickHandler = async () => {
     const isValid = ValidateEmail(email);
@@ -21,6 +24,9 @@ export default function SignIng() {
 
       if (response.status === 200) {
         toast.success("Login successfully...");
+        setTimeout(() => {
+          router.replace("/");
+        }, 1500);
       } else {
         toast.warning(response.message);
       }
@@ -76,6 +82,7 @@ export default function SignIng() {
           </Link>
         </div>
       </section>
+      <ToastContainer />
     </div>
   );
 }
