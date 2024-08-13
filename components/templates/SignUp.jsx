@@ -4,13 +4,13 @@ import { BiSolidUser } from "react-icons/bi";
 import { BiRightArrowAlt } from "react-icons/bi";
 
 export default function SignUp() {
-  const [email, setemail] = useState();
-  const [password, setpassword] = useState();
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
 
   return (
     <div className="flex justify-center items-center min-h-[80vh]">
       <section className="flex flex-col rounded-2xl mx-2 shadow-2xl p-5 items-center border">
-        <h2 className="text-gray-700 flex items-center justify-center font-bold italic text-2xl tracking-widest">
+        <h2 className="text-gray-700 flex items-center justify-center font-bold italic text-xl sm:text-2xl my-2 tracking-widest">
           <BiSolidUser className="mr-2" />
           Sign-up Form
         </h2>
