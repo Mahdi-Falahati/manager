@@ -82,7 +82,7 @@ export default function SignIng() {
           </Link>
         </div>
       </section>
-      <ToastContainer />
+      <ToastContainer limit={1} />
     </div>
   );
 }
