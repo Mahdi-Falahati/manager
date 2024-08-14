@@ -1,5 +1,5 @@
 import BurgerMenu from "@/elements/BurgerMenu";
-import NavBarItems from "@/elements/navBarItems";
+import NavBarItems from "@/elements/NavBarItems";
 
 export default function Menu() {
   return (
