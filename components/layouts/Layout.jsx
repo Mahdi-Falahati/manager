@@ -1,16 +1,19 @@
 import { GiImp } from "react-icons/gi";
 import { BiSolidHourglass } from "react-icons/bi";
 import Menu from "@/modules/Menu";
+import Link from "next/link";
 
 export default function Layout({ children }) {
   return (
     <>
       <header className="container mx-auto mb-6 ">
         <div className="flex justify-between items-center mx-2 flex-wrap mt-4">
-          <h1 className="italic font-bold text-2xl flex items-center text-gray-900 tracking-widest ">
-            Manager
-            <BiSolidHourglass className="text-green-600 text-xl ml-1" />
-          </h1>
+          <Link href="/">
+            <h1 className="italic font-bold text-2xl flex items-center text-gray-900 tracking-widest ">
+              Manager
+              <BiSolidHourglass className="text-green-600 text-xl ml-1" />
+            </h1>
+          </Link>
           <Menu />
         </div>
       </header>
