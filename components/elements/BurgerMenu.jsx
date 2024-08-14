@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import NavBarItems from "./navBarItems";
+import NavBarItems from "./NavBarItems";
 
 export default function BurgerMenu() {
   const [visibility, setvisibility] = useState(false);
