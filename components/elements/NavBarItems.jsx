@@ -1,30 +1,59 @@
+import { signOut, useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { signOut } from "next-auth/react";
 
 import { BiPencil } from "react-icons/bi";
 import { FcTreeStructure } from "react-icons/fc";
 import { GiPirateSkull } from "react-icons/gi";
-import { BiLogOutCircle } from "react-icons/bi";
+import { RiAccountCircleLine, RiArrowLeftCircleLine } from "react-icons/ri";
+import { AiOutlineArrowRight } from "react-icons/ai";
+import { BiLogInCircle } from "react-icons/bi";
 
 export default function NavBarItems() {
+  const { status } = useSession();
+  const [auth, setauth] = useState(false);
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      setauth(true);
+    }
+  }, [status]);
   return (
     <>
-      <Link href="/" className={linkStyles}>
-        Todos
-        <FcTreeStructure className="ml-1 text-2xl" />
-      </Link>
-      <Link href="/add-todo" className={linkStyles}>
-        Add Todo
-        <BiPencil className="ml-1 text-2xl  text-orange-700" />
-      </Link>
-      <Link href="/profile" className={linkStyles}>
-        Profile
-        <GiPirateSkull className="ml-1 text-2xl  text-black" />
-      </Link>
-      <button onClick={() => signOut()} className={linkStyles}>
-        Log out
-        <BiLogOutCircle className="ml-1 text-2xl  text-red-700" />
-      </button>
+      {auth ? (
+        <>
+          <Link href="/" className={linkStyles}>
+            Todos
+            <FcTreeStructure className="ml-1 text-2xl" />
+          </Link>
+          <Link href="/add-todo" className={linkStyles}>
+            Add Todo
+            <BiPencil className="ml-1 text-2xl  text-orange-700" />
+          </Link>
+          <Link href="/profile" className={linkStyles}>
+            Profile
+            <GiPirateSkull className="ml-1 text-2xl  text-black" />
+          </Link>
+          <button
+            onClick={() => signOut()}
+            className="bg-red-600 font-bold italic text-white rounded-xl tracking-widest px-3 flex items-center"
+          >
+            Log out
+            <AiOutlineArrowRight className="ml-1  text-white" />
+          </button>
+        </>
+      ) : (
+        <>
+          <Link href="/sign-in" className={linkStyles}>
+            <BiLogInCircle className="mr-1 text-xl  text-green-700" />
+            Login
+          </Link>
+          <Link href="/sign-up" className={linkStyles}>
+            <RiAccountCircleLine className="mr-1 text-xl  text-black" />
+            Sign-up
+          </Link>
+        </>
+      )}
     </>
   );
 }
