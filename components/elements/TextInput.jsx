@@ -1,12 +1,10 @@
-export default function TextInput({ icon, label }) {
+export default function TextInput({ children, label }) {
   return (
     <div className="m-3">
       <div className="relative w-full min-w-[200px] h-10 shadow-2xl">
-        {icon ? (
-          <div className="absolute grid w-5 h-5 place-items-center text-blue-gray-500 top-2/4 right-3 -translate-y-2/4">
-            {icon}
-          </div>
-        ) : null}
+        <div className="absolute grid w-5 h-5 place-items-center text-blue-gray-500 top-2/4 right-3 -translate-y-2/4">
+          {children}
+        </div>
         <input
           className="peer w-full h-full bg-transparent text-blue-gray-700 font-sans font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] !pr-9 border-blue-gray-200 focus:border-gray-900"
           placeholder=" "
