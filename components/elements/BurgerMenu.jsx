@@ -17,11 +17,11 @@ export default function BurgerMenu() {
         </button>
       </div>
       {visibility && (
-        <secion className="md:hidden absolute left-0 right-0 min-h-[350px] z-10 top-14">
+        <section className="md:hidden absolute left-0 right-0 min-h-[350px] z-10 top-14">
           <div className="flex flex-col justify-around min-h-[250px] bg-white">
             <NavBarItems />
           </div>
-        </secion>
+        </section>
       )}
     </>
   );

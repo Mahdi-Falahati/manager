@@ -36,7 +36,7 @@ export default function NavBarItems() {
           </Link>
           <button
             onClick={() => signOut()}
-            className="bg-red-600 font-bold italic text-white rounded-xl tracking-widest px-3 flex items-center"
+            className="bg-red-600 justify-center py-1 mx-4 font-bold italic text-white rounded-xl tracking-widest px-3 flex items-center"
           >
             Log out
             <AiOutlineArrowRight className="ml-1  text-white" />
