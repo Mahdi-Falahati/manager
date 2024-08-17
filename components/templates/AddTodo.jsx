@@ -1,6 +1,7 @@
 import RadioButton from "@/elements/RadioButton";
 import Textarea from "@/elements/Textarea";
 import TextInput from "@/elements/TextInput";
+import { useRouter } from "next/router";
 
 import { useState } from "react";
 
@@ -14,6 +15,19 @@ export default function AddTodo() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("todo");
+  const router = useRouter();
+
+  const saveTodoHandler = async () => {
+    if (title && description && status) {
+      const request = await fetch("/api/todos", {
+        method: "POST",
+        body: JSON.stringify({ title, description, status }),
+        headers: { "Content-Type": "application/json" },
+      });
+      const response = await request.json();
+      // console.log(response);
+    }
+  };
 
   return (
     <section>
@@ -78,7 +92,10 @@ export default function AddTodo() {
         <button className="bg-red-700 my-3 hover:bg-red-600 text-white min-w-[220px] py-2 rounded-xl font-bold italic tracking-widest">
           Cancel
         </button>
-        <button className="bg-green-700 my-3 hover:bg-green-600 text-white min-w-[220px] py-2 rounded-xl font-bold italic tracking-widest">
+        <button
+          onClick={saveTodoHandler}
+          className="bg-green-700 my-3 hover:bg-green-600 text-white min-w-[220px] py-2 rounded-xl font-bold italic tracking-widest"
+        >
           Save Todo
         </button>
       </div>
