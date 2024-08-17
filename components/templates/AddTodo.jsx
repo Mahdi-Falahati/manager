@@ -2,7 +2,7 @@ import RadioButton from "@/elements/RadioButton";
 import Textarea from "@/elements/Textarea";
 import TextInput from "@/elements/TextInput";
 import { useRouter } from "next/router";
-
+import { toast, ToastContainer } from "react-toastify";
 import { useState } from "react";
 
 import { AiOutlinePlusCircle } from "react-icons/ai";
@@ -25,7 +25,20 @@ export default function AddTodo() {
         headers: { "Content-Type": "application/json" },
       });
       const response = await request.json();
-      // console.log(response);
+      if (status === "success") {
+        toast.success("Login successfully...");
+        setTimeout(() => {
+          router.replace("/");
+        }, 1500);
+      } else {
+        toast.warning(response.message);
+      }
+    } else if (!title) {
+      toast.error("Enter the Title...");
+    } else if (!description) {
+      toast.error("Enter the Description...");
+    } else {
+      toast.error("Enter the Stataus...");
     }
   };
 
@@ -99,6 +112,7 @@ export default function AddTodo() {
           Save Todo
         </button>
       </div>
+      <ToastContainer limit={1} />
     </section>
   );
 }
