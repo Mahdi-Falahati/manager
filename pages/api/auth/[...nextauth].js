@@ -4,8 +4,9 @@ import connectDB from "@/utils/connectDB";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 
-const authOptions = {
+export const authOptions = {
   session: { strategy: "jwt" },
+  secret: process.env.AUTH_SECRET,
   providers: [
     Credentials({
       async authorize(credentials, req) {
