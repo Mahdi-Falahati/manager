@@ -1,6 +1,7 @@
 import User from "@/model/User";
 import connectDB from "@/utils/connectDB";
-import { getSession } from "next-auth/react";
+import { authOptions } from "./auth/[...nextauth]";
+import { getServerSession } from "next-auth";
 
 export default async function Handler(req, res) {
   try {
@@ -12,7 +13,7 @@ export default async function Handler(req, res) {
     });
   }
 
-  const session = await getSession({ req });
+  const session = await getServerSession(req, res, authOptions);
   if (!session) {
     return res.status(400).json({
       status: "failed",
@@ -24,7 +25,7 @@ export default async function Handler(req, res) {
     user: { email },
   } = session;
 
-  const user = await User({ email });
+  const user = await User.findOne({ email });
   if (!user) {
     return res.status(422).json({
       status: "failed",
@@ -33,11 +34,11 @@ export default async function Handler(req, res) {
   }
 
   if (req.method === "POST") {
-    const { todo } = req.body;
-
-    if (todo.title && todo.description && todo.status) {
-      user.todos.push(todo);
-      user.save();
+    const todo = req.body;
+    const { title, status, description } = todo;
+    if (title && description && status) {
+      user.todos.push({ title, status, description });
+      await user.save();
       return res.status(200).json({
         status: "success",
         message: "your todo is created...",
