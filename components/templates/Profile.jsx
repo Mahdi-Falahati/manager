@@ -1,4 +1,5 @@
 import TextInput from "@/elements/TextInput";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 import { TiUserOutline } from "react-icons/ti";
@@ -11,7 +12,24 @@ export default function Profile({ data }) {
   const [stateLastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
 
-  const saveDataHandler = async () => {};
+  const router = useRouter();
+
+  const saveDataHandler = async () => {
+    const req = await fetch("/api/profile", {
+      method: "POST",
+      body: JSON.stringify({
+        firstName: stateFirstName,
+        lastName: stateLastName,
+        password,
+      }),
+      headers: { "Content-Type": "applicaion/json" },
+    });
+
+    const res = await req.json();
+    if (res.status === "success") {
+      router.reload();
+    }
+  };
 
   return (
     <div>
@@ -55,20 +73,22 @@ export default function Profile({ data }) {
         />
       )}
       {firstName && lastName ? null : (
-        <TextInput
-          label="Enter Your Password"
-          onChange={setPassword}
-          value={password}
-        />
+        <>
+          <TextInput
+            label="Enter Your Password"
+            onChange={setPassword}
+            value={password}
+          />
+          <div className="flex justify-end items-center mt-5 flex-wrap">
+            <button
+              onClick={saveDataHandler}
+              className="w-[200px] hover:bg-green-700 text-center my-3 mx-1 bg-green-600 rounded-md text-white tracking-widest  py-2 font-bold"
+            >
+              Save
+            </button>
+          </div>
+        </>
       )}
-      <div className="flex justify-end items-center mt-5 flex-wrap">
-        <button
-          onClick={saveDataHandler}
-          className="w-[200px] hover:bg-green-700 text-center my-3 mx-1 bg-green-600 rounded-md text-white tracking-widest  py-2 font-bold"
-        >
-          Save
-        </button>
-      </div>
     </div>
   );
 }
