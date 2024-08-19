@@ -25,8 +25,8 @@ export default function AddTodo() {
         headers: { "Content-Type": "application/json" },
       });
       const response = await request.json();
-      if (status === "success") {
-        toast.success("Login successfully...");
+      if (response.status === "success") {
+        toast.success(response.message);
         setTimeout(() => {
           router.replace("/");
         }, 1500);
