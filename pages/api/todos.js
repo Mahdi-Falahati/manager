@@ -2,6 +2,7 @@ import User from "@/model/User";
 import connectDB from "@/utils/connectDB";
 import { authOptions } from "./auth/[...nextauth]";
 import { getServerSession } from "next-auth";
+import SortTodos from "@/utils/SortTodos";
 
 export default async function Handler(req, res) {
   try {
@@ -51,7 +52,12 @@ export default async function Handler(req, res) {
           "please write a description and a title and select a status for your todo...",
       });
     }
+  } else if (req.method === "GET") {
+    const sortedTodos = SortTodos(user.todos);
+    return res.status(200).json({ status: "success", todos: sortedTodos });
   }
 
-  res.status(200).json({});
+  return res
+    .status(400)
+    .json({ status: "failed", message: "Your Request is inavlid..." });
 }
