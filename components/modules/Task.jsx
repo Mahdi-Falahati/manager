@@ -4,8 +4,8 @@ import { TiArrowBackOutline } from "react-icons/ti";
 
 export default function Task({ title, next, back }) {
   return (
-    <section className="m-2 p-1 shadow-xl">
-      <div className="flex justify-around items-start px-1">
+    <section className="mx-2 mt-5 p-1 shadow-xl">
+      <div className="flex justify-start items-start px-1">
         <GiArcher className="mr-1 text-2xl w-[30px]" />
         <p className="text-justify font-bold text-gray-700 flex items-start">
           {title}
