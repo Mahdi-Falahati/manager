@@ -55,6 +55,21 @@ export default async function Handler(req, res) {
   } else if (req.method === "GET") {
     const sortedTodos = SortTodos(user.todos);
     return res.status(200).json({ status: "success", todos: sortedTodos });
+  } else if (req.method === "PATCH") {
+    const { id, status } = req.body;
+
+    if (!id || !status) {
+      return res
+        .status(422)
+        .json({ status: "failed", message: "Data Inavalid..." });
+    }
+
+    const result = await User.updateOne(
+      { "todos._id": id },
+      { $set: { "todos.$.status": status } }
+    );
+
+    return res.status(200).json({ status: "success" });
   }
 
   return res
