@@ -1,3 +1,5 @@
-export default function Home() {
-  return "";
+import HomePage from "@/templates/HomePage";
+
+export default function Index() {
+  return <HomePage />;
 }
