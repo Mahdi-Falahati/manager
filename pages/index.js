@@ -1,10 +1,10 @@
 import HomePage from "@/templates/HomePage";
 import { useSession } from "next-auth/react";
-import { Router } from "next/router";
+import { useRouter } from "next/router";
 
 export default function Index() {
   const { status } = useSession();
-  const router = useRouter();
+  const router = useRouterr();
 
   useEffect(() => {
     if (status === "unauthenticated") {
