@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 
 export default function Index() {
   const { status } = useSession();
-  const router = useRouterr();
+  const router = useRouter();
 
   useEffect(() => {
     if (status === "unauthenticated") {
