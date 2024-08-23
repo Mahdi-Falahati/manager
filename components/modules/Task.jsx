@@ -3,6 +3,8 @@ import { TiArrowForwardOutline } from "react-icons/ti";
 import { TiArrowBackOutline } from "react-icons/ti";
 import { VscTrash } from "react-icons/vsc";
 
+import { toast, ToastContainer } from "react-toastify";
+
 export default function Task({ data, next, back, fetchData }) {
   const { _id, title } = data;
 
@@ -27,9 +29,11 @@ export default function Task({ data, next, back, fetchData }) {
       headers: { "Content-Type": "application/json" },
     });
     const res = await req.json();
-    if (rs.status === "success") {
+    if (res.status === "success") {
       fetchData();
+      toast.success(res.message);
     } else {
+      toast.error(res.message);
     }
   };
 
@@ -69,6 +73,7 @@ export default function Task({ data, next, back, fetchData }) {
           </button>
         )}
       </div>
+      <ToastContainer limit={1} />
     </section>
   );
 }
