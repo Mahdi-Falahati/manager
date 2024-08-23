@@ -46,7 +46,7 @@ export default function NavBarItems() {
         <>
           <Link href="/sign-in" className={linkStyles}>
             <BiLogInCircle className="mr-1 text-xl  text-green-700" />
-            Login
+            Sign-in
           </Link>
           <Link href="/sign-up" className={linkStyles}>
             <RiAccountCircleLine className="mr-1 text-xl  text-black" />
