@@ -70,6 +70,20 @@ export default async function Handler(req, res) {
     );
 
     return res.status(200).json({ status: "success" });
+  } else if (req.method === "DELETE") {
+    const { id } = req.body;
+
+    if (!id) {
+      return res
+        .status(422)
+        .json({ status: "failed", message: "Data Inavalid..." });
+    }
+
+    const result = await User.updateOne(
+      { "todos._id": id },
+      { $pull: { todos: { _id: id } } }
+    );
+    return res.status(200).json({});
   }
 
   return res
