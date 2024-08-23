@@ -21,14 +21,13 @@ export default function SignIng() {
         password,
         redirect: false,
       });
-
       if (response.status === 200) {
         toast.success("Login successfully...");
         setTimeout(() => {
           router.replace("/");
         }, 1500);
       } else {
-        toast.warning(response.message);
+        toast.warning(response.error);
       }
     } else if (!isValid) {
       toast.error("Email is not Valid...");
