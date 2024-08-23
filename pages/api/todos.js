@@ -83,7 +83,9 @@ export default async function Handler(req, res) {
       { "todos._id": id },
       { $pull: { todos: { _id: id } } }
     );
-    return res.status(200).json({});
+    return res
+      .status(200)
+      .json({ status: "success", message: "todo delete successfully" });
   }
 
   return res
