@@ -1,6 +1,7 @@
 import { GiArcher } from "react-icons/gi";
 import { TiArrowForwardOutline } from "react-icons/ti";
 import { TiArrowBackOutline } from "react-icons/ti";
+import { VscTrash } from "react-icons/vsc";
 
 export default function Task({ data, next, back, fetchData }) {
   const { _id, title } = data;
@@ -19,8 +20,26 @@ export default function Task({ data, next, back, fetchData }) {
     }
   };
 
+  const deleteTodoHandler = async () => {
+    const req = await fetch("/api/todos", {
+      method: "delete",
+      body: JSON.stringify({ id: _id }),
+      headers: { "Content-Type": "application/json" },
+    });
+    const res = await req.json();
+    console.log(res);
+  };
+
   return (
     <section className="mx-2 mt-5 p-1 shadow-xl">
+      <div className="flex justify-end">
+        <button
+          onClick={deleteTodoHandler}
+          className="p-1 mx-1 rounded-md hover:bg-red-700 hover:text-white bg-white text-red-700"
+        >
+          <VscTrash className="text-xl" />
+        </button>
+      </div>
       <div className="flex justify-start items-start px-1">
         <GiArcher className="mr-1 text-2xl w-[30px]" />
         <p className="text-justify font-bold text-gray-700 flex items-start">

@@ -12,7 +12,9 @@ export default function HomePage() {
   const fetchData = async () => {
     const req = await fetch("/api/todos");
     const res = await req.json();
-    setTodos(res.todos);
+    if (res.status === "success") {
+      setTodos(res.todos);
+    }
   };
 
   return (
