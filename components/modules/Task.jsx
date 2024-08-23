@@ -27,7 +27,10 @@ export default function Task({ data, next, back, fetchData }) {
       headers: { "Content-Type": "application/json" },
     });
     const res = await req.json();
-    console.log(res);
+    if (rs.status === "success") {
+      fetchData();
+    } else {
+    }
   };
 
   return (
