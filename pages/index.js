@@ -9,7 +9,7 @@ export default function Index() {
 
   useEffect(() => {
     if (status === "unauthenticated") {
-      router.replace("/sin-in");
+      router.replace("/sign-in");
     }
   }, [status]);
 
