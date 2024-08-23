@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { GiArcher } from "react-icons/gi";
 import { TiArrowForwardOutline } from "react-icons/ti";
 import { TiArrowBackOutline } from "react-icons/ti";
@@ -49,9 +50,12 @@ export default function Task({ data, next, back, fetchData }) {
       </div>
       <div className="flex justify-start items-start px-1">
         <GiArcher className="mr-1 text-2xl w-[30px]" />
-        <p className="text-justify font-bold text-gray-700 flex items-start">
+        <Link
+          href={`/todo-details/${_id}`}
+          className="text-justify font-bold text-blue-950 hover:text-blue-800 flex items-start"
+        >
           {title}
-        </p>
+        </Link>
       </div>
       <div className="flex justify-around items-center flex-wrap">
         {back && (
